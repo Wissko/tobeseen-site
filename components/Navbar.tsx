@@ -92,9 +92,7 @@ export default function Navbar() {
             <nav className="tbs-menu-carousel" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
               <motion.div
                 className="tbs-menu-track"
-                initial={{ x: '8%' }}
-                animate={{ x: ['0%', '-50%'] }}
-                transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+                initial={{ x: 0 }}
                 drag="x"
                 dragConstraints={{ left: -1200, right: 240 }}
                 dragElastic={0.08}
