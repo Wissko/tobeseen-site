@@ -76,7 +76,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       setNeedsChoice(false);
     } else {
       document.documentElement.lang = 'en-AU';
-      setNeedsChoice(true);
+      window.localStorage.setItem('tbs-locale', 'en');
+      setNeedsChoice(false);
     }
     setIsReady(true);
   }, []);
