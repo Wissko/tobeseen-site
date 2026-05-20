@@ -1552,3 +1552,62 @@ body { background: var(--tbs-clay); color: var(--tbs-black); }
   background: var(--tbs-cream);
   transform: translate(-50%, -50%);
 }
+
+/* Liquid Glass refinement for floating menu pill */
+.tbs-menu-trigger {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.46) !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,255,255,.18) 42%, rgba(243,234,228,.38)),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.92), transparent 34%),
+    rgba(243,234,228,.28) !important;
+  color: rgba(5,5,5,.88) !important;
+  box-shadow:
+    0 22px 55px rgba(0,0,0,.18),
+    0 6px 18px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(255,255,255,.22),
+    inset 14px 0 34px rgba(255,255,255,.22) !important;
+  backdrop-filter: blur(26px) saturate(175%) contrast(112%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(175%) contrast(112%) !important;
+}
+.tbs-menu-trigger::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.68) 0%, rgba(255,255,255,.18) 24%, transparent 42%),
+    radial-gradient(circle at 82% 18%, rgba(255,255,255,.62), transparent 24%);
+  mix-blend-mode: screen;
+  opacity: .8;
+}
+.tbs-menu-trigger::before,
+.tbs-menu-trigger > span:not(.tbs-menu-trigger-dot),
+.tbs-menu-trigger-dot {
+  position: relative;
+  z-index: 1;
+}
+.tbs-menu-trigger > span:not(.tbs-menu-trigger-dot) {
+  color: rgba(5,5,5,.62) !important;
+}
+.tbs-menu-trigger-dot {
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255,255,255,.22), transparent 32%),
+    linear-gradient(145deg, rgba(14,14,14,.96), rgba(0,0,0,.78)) !important;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -10px 20px rgba(255,255,255,.04) !important;
+}
+.tbs-menu-trigger-dot::before,
+.tbs-menu-trigger-dot::after,
+.tbs-menu-trigger-dot i {
+  background: rgba(243,234,228,.9) !important;
+  box-shadow: 0 0 8px rgba(255,255,255,.18);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tbs-menu-trigger { background: rgba(248,246,240,.92) !important; }
+}
