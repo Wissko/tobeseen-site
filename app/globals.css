@@ -1800,3 +1800,124 @@ body { background: var(--tbs-clay); color: var(--tbs-black); }
     margin-left: 18vw !important;
   }
 }
+
+/* Native smooth snap scroll for clean carousel */
+.tbs-menu-carousel {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: clamp(1rem, 6vw, 6rem);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.tbs-menu-carousel::-webkit-scrollbar { display: none; }
+.tbs-menu-track {
+  min-width: max-content;
+  padding-right: clamp(2rem, 8vw, 8rem) !important;
+}
+.tbs-menu-card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+@media (min-width: 761px) {
+  .tbs-menu-track {
+    padding-left: max(6vw, calc((100vw - clamp(14rem, 18vw, 21rem)) / 2)) !important;
+    padding-right: max(6vw, calc((100vw - clamp(14rem, 18vw, 21rem)) / 2)) !important;
+  }
+  .tbs-menu-card:first-child,
+  .tbs-menu-card:nth-child(7) {
+    margin-left: 0 !important;
+  }
+}
+@media (max-width: 760px) {
+  .tbs-menu-carousel {
+    scroll-padding-inline: 18vw;
+  }
+  .tbs-menu-track {
+    padding-left: 18vw !important;
+    padding-right: 18vw !important;
+  }
+  .tbs-menu-card:first-child,
+  .tbs-menu-card:nth-child(7) {
+    margin-left: 0 !important;
+  }
+}
+
+/* Centered premium carousel composition */
+.tbs-menu-carousel {
+  padding-inline: 0 !important;
+  scroll-padding-inline: 50vw !important;
+}
+.tbs-menu-track {
+  gap: clamp(1.2rem, 2.4vw, 2rem) !important;
+  padding-left: calc(50vw - (min(42vw, 24rem) / 2)) !important;
+  padding-right: calc(50vw - (min(42vw, 24rem) / 2)) !important;
+}
+.tbs-menu-card {
+  flex-basis: min(42vw, 24rem) !important;
+  opacity: .74;
+  transform: scale(.94);
+  transition: opacity .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+.tbs-menu-card.is-active,
+.tbs-menu-card:hover {
+  opacity: 1;
+  transform: scale(1) translateY(-.35rem) !important;
+}
+@media (max-width: 760px) {
+  .tbs-menu-track {
+    gap: .9rem !important;
+    padding-left: 15vw !important;
+    padding-right: 15vw !important;
+  }
+  .tbs-menu-card {
+    flex-basis: 70vw !important;
+    opacity: .82;
+    transform: scale(.96);
+  }
+  .tbs-menu-card.is-active,
+  .tbs-menu-card:hover {
+    transform: scale(1) translateY(-.2rem) !important;
+  }
+}
+@media (max-width: 420px) {
+  .tbs-menu-track {
+    padding-left: 16vw !important;
+    padding-right: 16vw !important;
+  }
+  .tbs-menu-card { flex-basis: 68vw !important; }
+}
+
+/* Loop-peek carousel centering */
+.tbs-menu-carousel {
+  scroll-padding-inline: 50% !important;
+}
+.tbs-menu-track {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+@media (min-width: 761px) {
+  .tbs-menu-card {
+    flex-basis: min(34vw, 25rem) !important;
+  }
+  .tbs-menu-card strong {
+    font-size: clamp(2rem, 3.6vw, 3.45rem) !important;
+  }
+}
+@media (max-width: 760px) {
+  .tbs-menu-card {
+    flex-basis: 68vw !important;
+  }
+}
+@media (max-width: 420px) {
+  .tbs-menu-card { flex-basis: 66vw !important; }
+}
+
+/* Desktop first-card centering refinement */
+@media (min-width: 761px) {
+  .tbs-menu-track {
+    padding-left: 6.25rem !important;
+    padding-right: 6.25rem !important;
+  }
+}

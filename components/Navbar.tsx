@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +21,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { t, locale, setLocale } = useLanguage();
+  const carouselRef = useRef<HTMLElement | null>(null);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -37,7 +38,18 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const carouselItems = [...links, ...links];
+  useEffect(() => {
+    if (!open || !carouselRef.current) return;
+    const carousel = carouselRef.current;
+    const firstRealCard = carousel.querySelectorAll<HTMLElement>('.tbs-menu-card')[1];
+    if (!firstRealCard) return;
+    requestAnimationFrame(() => {
+      const target = firstRealCard.offsetLeft - (carousel.clientWidth - firstRealCard.offsetWidth) / 2;
+      carousel.scrollTo({ left: Math.max(0, target), behavior: 'instant' });
+    });
+  }, [open]);
+
+  const carouselItems = [links[links.length - 1], ...links, links[0]];
 
   return (
     <>
@@ -89,23 +101,16 @@ export default function Navbar() {
               <span>{links.length.toString().padStart(2, '0')} items</span>
             </div>
 
-            <nav className="tbs-menu-carousel" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
-              <motion.div
-                className="tbs-menu-track"
-                initial={{ x: 0 }}
-                drag="x"
-                dragConstraints={{ left: -1200, right: 240 }}
-                dragElastic={0.08}
-                whileTap={{ cursor: 'grabbing' }}
-              >
+            <nav ref={carouselRef} className="tbs-menu-carousel" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+              <div className="tbs-menu-track">
                 {carouselItems.map((link, i) => {
                   const active = pathname === link.href;
                   return (
                     <Link
-                      key={`${link.href}-${i}`}
+                      key={`${link.href}-${link.index}-${i}`}
                       href={link.href}
                       onClick={close}
-                      className={`tbs-menu-card${active ? ' is-active' : ''}`}
+                      className="tbs-menu-card"
                       aria-current={active ? 'page' : undefined}
                     >
                       <span className="tbs-menu-card-index">{link.index}</span>
@@ -114,7 +119,7 @@ export default function Navbar() {
                     </Link>
                   );
                 })}
-              </motion.div>
+              </div>
             </nav>
 
             <div className="tbs-menu-footer">
