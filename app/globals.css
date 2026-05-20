@@ -1921,3 +1921,58 @@ body { background: var(--tbs-clay); color: var(--tbs-black); }
     padding-right: 6.25rem !important;
   }
 }
+
+/* Infinite carousel curve: stronger arc + depth */
+.tbs-menu-carousel {
+  perspective: 1200px;
+  perspective-origin: 50% 42%;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+.tbs-menu-track {
+  align-items: center !important;
+  padding-block: 2.8rem !important;
+}
+.tbs-menu-card {
+  --curve-y: 0rem;
+  --curve-r: 0deg;
+  --curve-scale: 1;
+  --curve-opacity: 1;
+  opacity: var(--curve-opacity) !important;
+  transform:
+    translateY(var(--curve-y))
+    rotateZ(var(--curve-r))
+    scale(var(--curve-scale)) !important;
+  transform-origin: center center;
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease,
+    background .22s ease !important;
+}
+.tbs-menu-card:hover {
+  opacity: 1 !important;
+  transform:
+    translateY(calc(var(--curve-y) - .35rem))
+    rotateZ(var(--curve-r))
+    scale(calc(var(--curve-scale) + .025)) !important;
+}
+@media (min-width: 761px) {
+  .tbs-menu-track {
+    gap: clamp(1.6rem, 3.2vw, 3.5rem) !important;
+    padding-block: 3.8rem !important;
+  }
+}
+@media (max-width: 760px) {
+  .tbs-menu-carousel {
+    mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  }
+  .tbs-menu-track {
+    padding-block: 2.4rem !important;
+  }
+  .tbs-menu-card:hover {
+    transform:
+      translateY(var(--curve-y))
+      rotateZ(var(--curve-r))
+      scale(var(--curve-scale)) !important;
+  }
+}

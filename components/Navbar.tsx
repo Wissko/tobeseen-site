@@ -41,15 +41,71 @@ export default function Navbar() {
   useEffect(() => {
     if (!open || !carouselRef.current) return;
     const carousel = carouselRef.current;
-    const firstRealCard = carousel.querySelectorAll<HTMLElement>('.tbs-menu-card')[1];
-    if (!firstRealCard) return;
-    requestAnimationFrame(() => {
-      const target = firstRealCard.offsetLeft - (carousel.clientWidth - firstRealCard.offsetWidth) / 2;
-      carousel.scrollTo({ left: Math.max(0, target), behavior: 'instant' });
-    });
+    let ignoreScroll = false;
+
+    const getCards = () => carousel.querySelectorAll<HTMLElement>('.tbs-menu-card');
+    const getCenteredScroll = (card: HTMLElement) => (
+      card.offsetLeft - (carousel.clientWidth - card.offsetWidth) / 2
+    );
+
+    const centerMiddleHome = () => {
+      const cards = getCards();
+      const middleHome = cards[links.length];
+      if (!middleHome) return;
+      ignoreScroll = true;
+      carousel.scrollTo({ left: Math.max(0, getCenteredScroll(middleHome)), behavior: 'instant' });
+      requestAnimationFrame(() => { ignoreScroll = false; });
+    };
+
+    const updateCarouselShape = () => {
+      const cards = Array.from(getCards());
+      const carouselCenter = carousel.getBoundingClientRect().left + carousel.clientWidth / 2;
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const distance = (rect.left + rect.width / 2 - carouselCenter) / carousel.clientWidth;
+        const clamped = Math.max(-1, Math.min(1, distance));
+        const depth = Math.min(1, Math.abs(clamped) * 2.15);
+        card.style.setProperty('--curve-y', `${depth * 3.8}rem`);
+        card.style.setProperty('--curve-r', `${clamped * 11}deg`);
+        card.style.setProperty('--curve-scale', `${1 - depth * 0.14}`);
+        card.style.setProperty('--curve-opacity', `${1 - depth * 0.36}`);
+      });
+    };
+
+    const keepInfiniteLoop = () => {
+      updateCarouselShape();
+      if (ignoreScroll) return;
+      const cards = getCards();
+      const previousContact = cards[links.length - 1];
+      const middleHome = cards[links.length];
+      const nextHome = cards[links.length * 2];
+      if (!previousContact || !middleHome || !nextHome) return;
+
+      const setWidth = middleHome.offsetLeft - cards[0].offsetLeft;
+      const previousContactCenter = getCenteredScroll(previousContact);
+      const nextHomeCenter = getCenteredScroll(nextHome);
+
+      if (carousel.scrollLeft <= previousContactCenter + 4) {
+        ignoreScroll = true;
+        carousel.scrollTo({ left: carousel.scrollLeft + setWidth, behavior: 'instant' });
+        requestAnimationFrame(() => { ignoreScroll = false; updateCarouselShape(); });
+      } else if (carousel.scrollLeft >= nextHomeCenter - 4) {
+        ignoreScroll = true;
+        carousel.scrollTo({ left: carousel.scrollLeft - setWidth, behavior: 'instant' });
+        requestAnimationFrame(() => { ignoreScroll = false; updateCarouselShape(); });
+      }
+    };
+
+    requestAnimationFrame(() => { centerMiddleHome(); updateCarouselShape(); });
+    carousel.addEventListener('scroll', keepInfiniteLoop, { passive: true });
+    window.addEventListener('resize', centerMiddleHome);
+    return () => {
+      carousel.removeEventListener('scroll', keepInfiniteLoop);
+      window.removeEventListener('resize', centerMiddleHome);
+    };
   }, [open]);
 
-  const carouselItems = [links[links.length - 1], ...links, links[0]];
+  const carouselItems = [...links, ...links, ...links];
 
   return (
     <>
