@@ -266,38 +266,34 @@ export default function PricingPage() {
       >
         <div className="page-hero-gradient" />
         <div className="editorial-shell pricing-hero-grid" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <AnimatedSection>
-            <div>
-              <p className="premium-eyebrow" style={{ marginBottom: '1rem', color: 'rgba(222, 217, 204, 0.78)' }}>{copy.heroEyebrow}</p>
-              <h1
-                className="heading-display"
-                style={{
-                  fontSize: 'clamp(68px, 13vw, 156px)',
-                  color: 'var(--white)',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {copy.heroTitle}
-              </h1>
-              <p className="page-hero-copy" style={{ maxWidth: '36rem' }}>
-                {copy.heroBody}
-              </p>
-            </div>
-          </AnimatedSection>
+          <div>
+            <p className="premium-eyebrow" style={{ marginBottom: '1rem', color: 'rgba(222, 217, 204, 0.78)' }}>{copy.heroEyebrow}</p>
+            <h1
+              className="heading-display"
+              style={{
+                fontSize: 'clamp(68px, 13vw, 156px)',
+                color: 'var(--white)',
+                marginBottom: '1.5rem',
+              }}
+            >
+              {copy.heroTitle}
+            </h1>
+            <p className="page-hero-copy" style={{ maxWidth: '36rem' }}>
+              {copy.heroBody}
+            </p>
+          </div>
 
-          <AnimatedSection delay={0.08}>
-            <div className="pricing-hero-panel">
-              <span className="pricing-panel-label">{copy.panelLabel}</span>
-              <ul className="pricing-hero-points">
-                {copy.panelPoints.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="pricing-hero-note">
-                {copy.panelNote}
-              </p>
-            </div>
-          </AnimatedSection>
+          <div className="pricing-hero-panel">
+            <span className="pricing-panel-label">{copy.panelLabel}</span>
+            <ul className="pricing-hero-points">
+              {copy.panelPoints.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="pricing-hero-note">
+              {copy.panelNote}
+            </p>
+          </div>
         </div>
       </section>
 

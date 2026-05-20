@@ -8,74 +8,73 @@ import Marquee from '@/components/Marquee';
 import { useLanguage } from '@/components/LanguageProvider';
 import { getCopy } from '@/lib/site-copy';
 
-const featuredSystems = [
-  {
-    number: '01',
-    title: 'Wallet-First Digital Loyalty',
-    summary: 'Captures customers directly in their native Apple and Google Wallets to track visits and manage rewards.',
-    details: 'Best for businesses losing retention and missing out on repeat revenue from invisible customers.',
-    href: '/services#wallet-loyalty',
-  },
-  {
-    number: '02',
-    title: 'Booking Flows That Remove Friction',
-    summary: 'Online scheduling designed to reduce back-and-forth, no-shows, and admin drag.',
-    details: 'Built to feel simple for clients and dependable for your team.',
-    href: '/services#bookings',
-  },
-  {
-    number: '03',
-    title: 'Follow-Up Systems That Bring People Back',
-    summary: 'CRM journeys that re-engage past clients, request reviews, and keep revenue active.',
-    details: 'Ideal when growth is already in your database but nothing is prompting action.',
-    href: '/services#crm',
-  },
-];
+const featuredSystemsByLocale = {
+  en: [
+    {
+      number: '01',
+      title: 'Wallet-First Digital Loyalty',
+      summary: 'Captures customers directly in their native Apple and Google Wallets to track visits and manage rewards.',
+      details: 'Best for businesses losing retention and missing out on repeat revenue from invisible customers.',
+      href: '/services#wallet-loyalty',
+    },
+    {
+      number: '02',
+      title: 'Booking Flows That Remove Friction',
+      summary: 'Online scheduling designed to reduce back-and-forth, no-shows, and admin drag.',
+      details: 'Built to feel simple for clients and dependable for your team.',
+      href: '/services#bookings',
+    },
+    {
+      number: '03',
+      title: 'Follow-Up Systems That Bring People Back',
+      summary: 'CRM journeys that re-engage past clients, request reviews, and keep revenue active.',
+      details: 'Ideal when growth is already in your database but nothing is prompting action.',
+      href: '/services#crm',
+    },
+  ],
+  fr: [
+    {
+      number: '01',
+      title: 'Fidélité Wallet native',
+      summary: 'Connecte les clients directement à Apple et Google Wallet pour suivre les visites et gérer les récompenses.',
+      details: 'Pensé pour les entreprises qui perdent de la rétention et du revenu récurrent faute de lien direct.',
+      href: '/services#wallet-loyalty',
+    },
+    {
+      number: '02',
+      title: 'Réservations sans friction',
+      summary: 'Un parcours de prise de rendez-vous conçu pour réduire les échanges, les absences et la charge admin.',
+      details: 'Simple pour les clients, fiable pour l’équipe.',
+      href: '/services#bookings',
+    },
+    {
+      number: '03',
+      title: 'Suivi qui fait revenir',
+      summary: 'Des parcours CRM qui réactivent les anciens clients, demandent des avis et gardent le revenu actif.',
+      details: 'Utile quand la croissance existe déjà dans la base client, mais qu’aucun système ne la stimule.',
+      href: '/services#crm',
+    },
+  ],
+} as const;
 
-const services = [
-  {
-    num: '01.',
-    title: 'WEBSITE CREATION',
-    desc: 'Fast, premium websites built to create trust and move visitors toward a clear enquiry.',
-    tag: 'Web design',
-    href: '/services#websites',
-  },
-  {
-    num: '02.',
-    title: 'WALLET-FIRST LOYALTY',
-    desc: 'A direct connection in Apple and Google Wallets to track visits and drive predictable repeat revenue.',
-    tag: 'Retention',
-    href: '/services#wallet-loyalty',
-  },
-  {
-    num: '03.',
-    title: 'AUTOMATED BOOKINGS',
-    desc: 'A cleaner scheduling experience across your site, search listings, and existing calendar.',
-    tag: 'Scheduling',
-    href: '/services#bookings',
-  },
-  {
-    num: '04.',
-    title: 'CLIENT FOLLOW-UP CRM',
-    desc: 'Structured messages and reminders that turn one-time clients into repeat business.',
-    tag: 'CRM',
-    href: '/services#crm',
-  },
-  {
-    num: '05.',
-    title: 'SEO & PERFORMANCE INSIGHTS',
-    desc: 'Technical foundations, search visibility, and reporting that make decisions easier.',
-    tag: 'SEO',
-    href: '/services#seo-performance',
-  },
-  {
-    num: '06.',
-    title: 'FULL DIGITALISATION BUNDLE',
-    desc: 'A complete operating layer where website, loyalty, bookings, and follow-up work as one system.',
-    tag: 'Bundle',
-    href: '/services#bundle',
-  },
-];
+const servicesByLocale = {
+  en: [
+    { num: '01.', title: 'WEBSITE CREATION', desc: 'Fast, premium websites built to create trust and move visitors toward a clear enquiry.', tag: 'Web design', href: '/services#websites' },
+    { num: '02.', title: 'WALLET-FIRST LOYALTY', desc: 'A direct connection in Apple and Google Wallets to track visits and drive predictable repeat revenue.', tag: 'Retention', href: '/services#wallet-loyalty' },
+    { num: '03.', title: 'AUTOMATED BOOKINGS', desc: 'A cleaner scheduling experience across your site, search listings, and existing calendar.', tag: 'Scheduling', href: '/services#bookings' },
+    { num: '04.', title: 'CLIENT FOLLOW-UP CRM', desc: 'Structured messages and reminders that turn one-time clients into repeat business.', tag: 'CRM', href: '/services#crm' },
+    { num: '05.', title: 'SEO & PERFORMANCE INSIGHTS', desc: 'Technical foundations, search visibility, and reporting that make decisions easier.', tag: 'SEO', href: '/services#seo-performance' },
+    { num: '06.', title: 'FULL DIGITALISATION BUNDLE', desc: 'A complete operating layer where website, loyalty, bookings, and follow-up work as one system.', tag: 'Bundle', href: '/services#bundle' },
+  ],
+  fr: [
+    { num: '01.', title: 'CRÉATION DE SITE', desc: 'Des sites rapides et premium conçus pour inspirer confiance et guider vers une demande claire.', tag: 'Web design', href: '/services#websites' },
+    { num: '02.', title: 'FIDÉLITÉ WALLET', desc: 'Une connexion directe dans Apple et Google Wallet pour suivre les visites et créer du revenu récurrent.', tag: 'Rétention', href: '/services#wallet-loyalty' },
+    { num: '03.', title: 'RÉSERVATIONS AUTOMATISÉES', desc: 'Une expérience de réservation plus fluide entre votre site, vos fiches de recherche et votre calendrier.', tag: 'Planning', href: '/services#bookings' },
+    { num: '04.', title: 'CRM DE SUIVI CLIENT', desc: 'Des messages et rappels structurés qui transforment les clients ponctuels en clients récurrents.', tag: 'CRM', href: '/services#crm' },
+    { num: '05.', title: 'SEO ET PERFORMANCE', desc: 'Des bases techniques, de la visibilité et un reporting qui rendent les décisions plus simples.', tag: 'SEO', href: '/services#seo-performance' },
+    { num: '06.', title: 'DIGITALISATION COMPLÈTE', desc: 'Une couche opérationnelle où site, fidélité, réservations et suivi fonctionnent comme un seul système.', tag: 'Bundle', href: '/services#bundle' },
+  ],
+} as const;
 
 const faqs = [
   {
@@ -145,6 +144,8 @@ export default function HomePage() {
   const { locale } = useLanguage();
   const copy = getCopy(locale).home;
   const localizedFaqs = copy.faqs.map(([q, a], index) => ({ ...faqs[index], q, a }));
+  const localizedFeaturedSystems = featuredSystemsByLocale[locale];
+  const localizedServices = servicesByLocale[locale];
 
   return (
     <>
@@ -194,7 +195,7 @@ export default function HomePage() {
           </AnimatedSection>
 
           <div className="premium-grid-3">
-            {featuredSystems.map((system, index) => (
+            {localizedFeaturedSystems.map((system, index) => (
               <AnimatedSection key={system.title} delay={index * 0.08}>
                 <Link href={system.href} style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}>
                   <article className="premium-card premium-card-dark selected-system-card">
@@ -231,7 +232,7 @@ export default function HomePage() {
           </AnimatedSection>
 
           <div style={{ display: 'grid', gap: '1rem' }}>
-            {services.map((service, index) => (
+            {localizedServices.map((service, index) => (
               <AnimatedSection key={service.num} delay={index * 0.05}>
                 <Link href={service.href} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                   <div className="premium-card premium-card-light service-row-card">

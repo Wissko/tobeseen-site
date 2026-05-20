@@ -46,7 +46,7 @@ export default function Footer() {
   return (
     <footer ref={ref} style={{ background: 'var(--black)', position: 'relative', overflow: 'hidden' }}>
 
-      {/* Wave SVG separator — gloss effect */}
+      {/* Wave SVG separator - gloss effect */}
       <div style={{ position: 'relative', marginBottom: '-1px' }}>
         <svg
           viewBox="0 0 1440 80"
@@ -57,7 +57,7 @@ export default function Footer() {
           {/* Gloss wave 1 */}
           <motion.path
             d="M0,80 L0,45 C180,70 360,15 540,40 C720,65 900,20 1080,38 C1260,56 1380,28 1440,42 L1440,80 Z"
-            fill="rgba(200,240,0,0.03)"
+            fill="rgba(222,217,204,0.045)"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
@@ -65,7 +65,7 @@ export default function Footer() {
           {/* Gloss wave 2 */}
           <motion.path
             d="M0,80 L0,55 C200,72 400,30 600,50 C800,70 1000,35 1200,48 C1350,57 1420,40 1440,52 L1440,80 Z"
-            fill="rgba(200,240,0,0.015)"
+            fill="rgba(122,99,134,0.035)"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
@@ -85,7 +85,7 @@ export default function Footer() {
         left: '-50%',
         width: '200%',
         height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(200,240,0,0.15), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(222,217,204,0.18), transparent)',
         animation: 'shimmer 4s ease-in-out infinite',
       }} />
 
@@ -126,8 +126,8 @@ export default function Footer() {
       <AnimatedLine />
 
       {/* Footer body */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '4rem 2rem 2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '3rem', marginBottom: '3rem' }}>
+      <div className="footer-inner">
+        <div className="footer-grid">
 
           {/* Brand */}
           <motion.div
@@ -157,7 +157,7 @@ export default function Footer() {
                 height: '8px',
                 borderRadius: '50%',
                 background: 'var(--accent)',
-                boxShadow: '0 0 12px rgba(200,240,0,0.4)',
+                boxShadow: '0 0 12px rgba(222,217,204,0.34)',
               }} />
             </div>
             <p style={{
