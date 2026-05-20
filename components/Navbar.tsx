@@ -49,7 +49,7 @@ export default function Navbar() {
         transition={{ duration: 0.3, ease: EASE }}
         className="tbs-menu-trigger"
       >
-        <span className="tbs-menu-trigger-dot" />
+        <span className="tbs-menu-trigger-dot"><i /></span>
         <span>{t.nav.menu}</span>
       </motion.button>
 

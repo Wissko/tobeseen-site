@@ -1475,3 +1475,80 @@ body { background: var(--tbs-clay); color: var(--tbs-black); }
   .tbs-menu-card { flex-basis: 72vw; min-height: 19.5rem; }
   .tbs-menu-card strong { font-size: clamp(2.75rem, 13vw, 4.2rem); }
 }
+
+/* Reference-inspired floating ivory menu pill */
+.tbs-menu-trigger {
+  left: 50% !important;
+  top: max(1.05rem, env(safe-area-inset-top)) !important;
+  transform: translateX(-50%);
+  width: min(calc(100vw - 2rem), 29rem);
+  min-height: 4.15rem;
+  justify-content: space-between;
+  padding: .55rem .55rem .55rem 1.45rem;
+  border: 1px solid rgba(5,5,5,.075);
+  border-radius: 999px;
+  background: rgba(248,246,240,.94);
+  color: #050505;
+  box-shadow: 0 18px 45px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.78);
+  backdrop-filter: blur(20px) saturate(130%);
+  mix-blend-mode: normal;
+}
+.tbs-menu-trigger::before {
+  content: 'TO BE SEEN';
+  font-family: Satoshi, system-ui, sans-serif;
+  font-size: .84rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.tbs-menu-trigger > span:not(.tbs-menu-trigger-dot) {
+  margin-left: auto;
+  color: rgba(5,5,5,.58);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+.tbs-menu-trigger-dot {
+  order: 3;
+  width: 3.05rem;
+  height: 3.05rem;
+  margin-left: .72rem;
+  border-radius: 50%;
+  background: #050505;
+  box-shadow: none;
+  position: relative;
+}
+.tbs-menu-trigger-dot::before,
+.tbs-menu-trigger-dot::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 1.12rem;
+  height: 1px;
+  background: var(--tbs-cream);
+  transform: translateX(-50%);
+}
+.tbs-menu-trigger-dot::before { top: 1.22rem; }
+.tbs-menu-trigger-dot::after { top: 1.78rem; }
+.tbs-top-cta { display: none; }
+@media (max-width: 760px) {
+  .tbs-menu-trigger {
+    width: calc(100vw - 2rem);
+    min-height: 3.85rem;
+    padding-left: 1.15rem;
+  }
+  .tbs-menu-trigger::before { font-size: .78rem; }
+  .tbs-menu-trigger > span:not(.tbs-menu-trigger-dot) { font-size: .66rem; }
+  .tbs-menu-trigger-dot { width: 2.8rem; height: 2.8rem; margin-left: .55rem; }
+  .tbs-menu-trigger-dot::before { top: 1.08rem; }
+  .tbs-menu-trigger-dot::after { top: 1.62rem; }
+}
+.tbs-menu-trigger-dot i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.12rem;
+  height: 1px;
+  background: var(--tbs-cream);
+  transform: translate(-50%, -50%);
+}
